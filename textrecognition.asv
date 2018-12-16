@@ -1,0 +1,14 @@
+Imageinput = imread('testingimage.jpg'); %%to take image as input
+figure(1)
+imshow(Imageinput);
+title('Input image with noise')%%To display the image as it is
+if size(Imageinput,3)== 3
+    Imageinput=rgb2gray(Imageinput);%%to convert rgb image to gray scale
+end
+Threshold = graythresh(Imageinput);
+Imageinput = ~IM2BW(Imageinput,Threshold); %%to convert igrayscale image to binary image
+Imageinput = bwareaopern(Imageinput,30);%%to remove all objects less than 30 pixels
+pause(1);
+[L, Ne] = bwlabel(Imageinput);%%connected components
+propied = regionprops(L, 'BoundingBon')
+
